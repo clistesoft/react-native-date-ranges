@@ -36,9 +36,7 @@ export default class ComposePicker extends Component {
       endDate: null,
       date: new Date(),
       focus: 'startDate',
-      currentDate: moment(),
-      textStartDate: 'Start Date',
-      textEndDate: 'End Date'
+      currentDate: moment()
     };
   }
   isDateBlocked = date => {
@@ -64,7 +62,7 @@ export default class ComposePicker extends Component {
   };
   onConfirm = () => {
     const returnFormat = this.props.returnFormat || 'YYYY/MM/DD';
-    const outFormat = this.props.outFormat || 'LL';
+    const outFormat = this.props.outFormat || 'MM/DD/YYYY';
     if (!this.props.mode || this.props.mode === 'single') {
       this.setState({
         showContent: true,
@@ -84,7 +82,7 @@ export default class ComposePicker extends Component {
       const end = this.state.endDate.format(outFormat);
       this.setState({
         showContent: true,
-        selected: `${start} ${this.props.dateSplitter} ${end}`
+        selected: `from ${start} to ${end}`
       });
       this.setModalVisible(false);
 
@@ -157,7 +155,7 @@ export default class ComposePicker extends Component {
           this.setModalVisible(true);
         }}
         style={[
-          { height: '100%', justifyContent: 'center' },
+          { width: '100%', height: '100%', justifyContent: 'center' },
           style
         ]}
       >
@@ -173,7 +171,7 @@ export default class ComposePicker extends Component {
             transparent={false}
             visible={this.state.modalVisible}
           >
-            <View style={{ flex: 1, flexDirection: 'column' , backgroundColor: this.props.calendarBgColor}}>
+            <View stlye={{ flex: 1, flexDirection: 'column' }}>
               <View style={{ height: '90%' }}>
                 <DateRange
                   headFormat={this.props.headFormat}
@@ -184,13 +182,10 @@ export default class ComposePicker extends Component {
                   startDate={this.state.startDate}
                   endDate={this.state.endDate}
                   focusedInput={this.state.focus}
-                  calendarBgColor={this.props.calendarBgColor || undefined}
                   selectedBgColor={this.props.selectedBgColor || undefined}
                   selectedTextColor={this.props.selectedTextColor || undefined}
                   mode={this.props.mode || 'single'}
                   currentDate={this.state.currentDate}
-                  textStartDate={this.state.textStartDate}
-                  textEndDate={this.state.textEndDate}
                 />
               </View>
               <View
@@ -217,4 +212,4 @@ ComposePicker.propTypes = {
   dateSplitter: PropTypes.string
 };
 
-ComposePicker.defaultProps = { dateSplitter: '->' };
+ComposePicker.defaultProps = { dateSplitter: ' to ' };

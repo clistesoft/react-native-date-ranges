@@ -82,7 +82,7 @@ export default class ComposePicker extends Component {
       const end = this.state.endDate.format(outFormat);
       this.setState({
         showContent: true,
-        selected: `from ${start} to ${end}`
+        selected: `FROM ${start} TO ${end}`
       });
       this.setModalVisible(false);
 
